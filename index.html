@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For Gunnu ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For GUNNU 💖</title>
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, #2a2a2a, #0f0f0f 60%);
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5c2d8, #e6e6e6);
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
       overflow: hidden;
     }
 
     .screen {
       display: none;
       text-align: center;
+      padding: 20px;
+      animation: fadeIn 0.8s ease;
     }
 
     .screen.active {
@@ -27,77 +29,146 @@
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      font-size: 2.2rem;
+      color: #b03060;
+      margin-bottom: 30px;
     }
 
-    button {
-      padding: 12px 28px;
-      font-size: 18px;
+    p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 16px 40px;
+      font-size: 1.3rem;
       border: none;
-      border-radius: 30px;
+      border-radius: 50px;
       cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
+      margin: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    #yesBtn {
-      background: #ff4d6d;
-      color: white;
+    .btn:active {
+      transform: scale(0.95);
     }
 
-    #noBtn {
-      background: #444;
+    .yes {
+      background: linear-gradient(135deg, #ff5f9e, #ff86b7);
       color: white;
+      box-shadow: 0 10px 20px rgba(255,95,158,0.4);
+    }
+
+    .no {
+      background: #ddd;
+      color: #333;
       position: absolute;
     }
 
+    .next {
+      background: linear-gradient(135deg, #b85cff, #d09bff);
+      color: white;
+      margin-top: 20px;
+    }
+
     video {
-      width: 320px;
+      width: 90%;
+      max-width: 350px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255,77,109,0.6);
+      margin-top: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      color: #ff5f9e;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Screen 1 -->
+  <!-- SCREEN 1 -->
   <div class="screen active" id="screen1">
-    <h1>Will you be my Valentine? 💖</h1>
-    <button id="yesBtn">Yes 😍</button>
-    <button id="noBtn">No 🙄</button>
+    <h1>Will you be my Valentine, GUNNU? 💕</h1>
+    <button class="btn yes" onclick="yesClicked()">YES 💖</button>
+    <button class="btn no" id="noBtn" onmouseover="moveNo()">NO 🙃</button>
   </div>
 
-  <!-- Screen 2 -->
+  <!-- SCREEN 2 -->
   <div class="screen" id="screen2">
-    <video src="valentine.mp4" autoplay loop></video>
-    <h1>I knew it 😘<br>I love you so much ❤️</h1>
-    <button onclick="nextScreen()">Next ➡️</button>
+    <h1>I knew it 😌</h1>
+    <p>I love you so much 💖</p>
+
+    <video autoplay muted playsinline>
+      <source src="valentine.mp4" type="video/mp4">
+    </video>
+
+    <br>
+    <button class="btn next" onclick="nextPage()">Next 💌</button>
   </div>
 
-  <!-- Screen 3 (Old Content Placeholder) -->
+  <!-- SCREEN 3 (YOUR EXISTING PAGE CONTENT) -->
   <div class="screen" id="screen3">
-    <h1>💞 This is just the beginning 💞</h1>
-    <p>Your original Valentine page continues here...</p>
+    <h1>Happy Valentine’s Day GUNNU 💘</h1>
+    <p>
+      You mean everything to me.<br>
+      Thank you for being my happiness, my peace, my love 💖
+    </p>
   </div>
 
-<script>
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
+  <script>
+    function yesClicked() {
+      document.getElementById("screen1").classList.remove("active");
+      document.getElementById("screen2").classList.add("active");
+    }
 
-  yesBtn.onclick = () => {
-    document.getElementById("screen1").classList.remove("active");
-    document.getElementById("screen2").classList.add("active");
-  };
+    function nextPage() {
+      document.getElementById("screen2").classList.remove("active");
+      document.getElementById("screen3").classList.add("active");
+    }
 
-  function nextScreen() {
-    document.getElementById("screen2").classList.remove("active");
-    document.getElementById("screen3").classList.add("active");
-  }
+    function moveNo() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
 
-  noBtn.onmouseover = () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.left = `${x}px`;
-    noBtn.style
+    // Hearts generator
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
