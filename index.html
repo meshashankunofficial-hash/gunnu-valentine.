@@ -1,140 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Gunnu ❤️</title>
+  <meta charset="UTF-8">
+  <title>For Gunnu ❤️</title>
 
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #2a2a2a, #0f0f0f 60%);
-    color: #f5f5f5;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  /* Floating hearts */
-  .heart {
-    position: absolute;
-    bottom: -20px;
-    color: #ff6fae;
-    font-size: 20px;
-    animation: floatUp linear infinite;
-    opacity: 0.75;
-  }
-
-  @keyframes floatUp {
-    from {
-      transform: translateY(0) scale(1);
-      opacity: 0.9;
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #2a2a2a, #0f0f0f 60%);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
-    to {
-      transform: translateY(-110vh) scale(1.5);
-      opacity: 0;
+
+    .screen {
+      display: none;
+      text-align: center;
     }
-  }
 
-  .container {
-    text-align: center;
-    max-width: 600px;
-    padding: 22px;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    z-index: 2;
-  }
+    .screen.active {
+      display: block;
+    }
 
-  h1 {
-    font-size: 2.8rem;
-    margin-bottom: 22px;
-    color: #ffd6e8;
-  }
-
-  h1 span {
-    color: #ff6fae;
-    text-shadow: 0 0 14px rgba(255, 111, 174, 0.8);
-  }
-
-  p {
-    font-size: 1.3rem;
-    line-height: 1.85;
-    margin-bottom: 32px;
-    color: #eaeaea;
-  }
-
-  .valentine {
-    font-size: 2rem;
-    color: #ffc1dc;
-    animation: glow 2s infinite alternate;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  @keyframes glow {
-    from { text-shadow: 0 0 6px rgba(255, 111, 174, 0.6); }
-    to { text-shadow: 0 0 20px rgba(255, 111, 174, 1); }
-  }
-
-  /* 📱 Mobile tweaks */
-  @media (max-width: 600px) {
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.7;
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
     }
 
-    .valentine {
-      font-size: 1.6rem;
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
     }
-  }
-</style>
+
+    #noBtn {
+      background: #444;
+      color: white;
+      position: absolute;
+    }
+
+    video {
+      width: 320px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,77,109,0.6);
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>Hey <span>GUNNU</span> ❤️</h1>
-
-  <p>
-    I don’t know how to say this perfectly,<br>
-    but loving you feels natural… like breathing.<br><br>
-
-    You make my ordinary days feel special,<br>
-    and my quiet moments feel complete.<br><br>
-
-    With you, I feel calm, happy,<br>
-    and a little more <em>me</em> 💕
-  </p>
-
-  <div class="valentine">
-    Happy Valentine’s Day 💖
+  <!-- Screen 1 -->
+  <div class="screen active" id="screen1">
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 🙄</button>
   </div>
-</div>
+
+  <!-- Screen 2 -->
+  <div class="screen" id="screen2">
+    <video src="valentine.mp4" autoplay loop></video>
+    <h1>I knew it 😘<br>I love you so much ❤️</h1>
+    <button onclick="nextScreen()">Next ➡️</button>
+  </div>
+
+  <!-- Screen 3 (Old Content Placeholder) -->
+  <div class="screen" id="screen3">
+    <h1>💞 This is just the beginning 💞</h1>
+    <p>Your original Valentine page continues here...</p>
+  </div>
 
 <script>
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (6 + Math.random() * 6) + "s";
-    document.body.appendChild(heart);
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
 
-    setTimeout(() => {
-      heart.remove();
-    }, 12000);
+  yesBtn.onclick = () => {
+    document.getElementById("screen1").classList.remove("active");
+    document.getElementById("screen2").classList.add("active");
+  };
+
+  function nextScreen() {
+    document.getElementById("screen2").classList.remove("active");
+    document.getElementById("screen3").classList.add("active");
   }
 
-  setInterval(createHeart, 450);
-</script>
-
-</body>
-</html>
+  noBtn.onmouseover = () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = `${x}px`;
+    noBtn.style
